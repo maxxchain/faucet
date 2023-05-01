@@ -1,7 +1,7 @@
 {
-  "name": "poa-network-sokol-faucet",
+  "name": "maxxchain-test-network-faucet",
   "version": "1.0.2",
-  "description": "Sokol tetnet POA Network faucet",
+  "description": "MaxxChain tetnet Network faucet",
   "main": "index.js",
   "scripts": {
     "start": "npm run sass && npm run coffee && node index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://git.heroku.com/faucet-sokol.git"
+    "url": "https://github.com/maxxchain/faucet"
   },
   "author": "poanetwork",
   "license": "MIT",
