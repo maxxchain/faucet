@@ -6,7 +6,9 @@
   },
   "Ethereum": {
     "milliEtherToTransfer": 500,
-    "gasLimit": "21000",
+    "chainId": 1023,
+    "gas": "21000",
+    "gasPrice": "1000000000",
     "prod": {
       "rpc": "http://127.0.0.1:8545",
       "account": "",
