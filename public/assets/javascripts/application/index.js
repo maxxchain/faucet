@@ -6,7 +6,7 @@ $(function() {
 		loader.removeClass("hidden");
 		var receiver = $("#receiver").val();
 		$.ajax({
-		  	url:"/",
+		  	url:"/.netlify/functions/index",
 		  	type:"POST",
 		  	data: $this.serialize()
 		}).done(function(data) {

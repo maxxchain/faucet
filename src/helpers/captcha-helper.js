@@ -1,12 +1,11 @@
 const querystring = require('querystring')
 const https = require('https')
 const { debug } = require('../helpers/debug')
-const { generateErrorResponse } = require('../helpers/generate-response')
+const config = require('../../config.json')
 
-function validateCaptcha (app, captchaResponse) {
-	const config = app.config
+function validateCaptcha (captchaResponse) {
 	return new Promise((resolve, reject) => {
-		const isDebug = app.config.debug
+		const isDebug = config.debug
 		const secret = config.Captcha.secret
 	    const post_data_json = {
 	      secret,

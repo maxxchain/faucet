@@ -2,10 +2,11 @@ const EthereumTx = require('ethereumjs-tx')
 const { generateErrorResponse } = require('../helpers/generate-response')
 const { validateCaptcha } = require('../helpers/captcha-helper')
 const { debug } = require('../helpers/debug')
+const { configureWeb3 } = require('../helpers/blockchain-helper')
+const config = require('../../config.json')
 
-module.exports = function (app) {
-	const config = app.config
-	const web3 = app.web3
+module.exports = function (router) {
+	const web3 = configureWeb3()
 
 	const messages = {
 		INVALID_CAPTCHA: 'Invalid captcha',
@@ -14,8 +15,8 @@ module.exports = function (app) {
 		TX_HAS_BEEN_MINED: 'Tx has been mined',
 	}
 
-	app.post('/', async function (request, response) {
-		const isDebug = app.config.debug
+	router.post('/', async function (request, response) {
+		const isDebug = config.debug
 		const receiver = request.body.receiver
 		// debug(isDebug, "REQUEST:")
 		// debug(isDebug, request.body)
@@ -29,7 +30,7 @@ module.exports = function (app) {
 
 		// let captchaResponse
 		// try {
-		// 	captchaResponse = await validateCaptcha(app, recaptureResponse)
+		// 	captchaResponse = await validateCaptcha(recaptureResponse)
 		// } catch(e) {
 		// 	return generateErrorResponse(response, e)
 		// }
@@ -40,7 +41,7 @@ module.exports = function (app) {
 		await sendPOAToRecipient(web3, receiver, response, isDebug)
 	});
 
-	app.get('/health', async function (request, response) {
+	router.get('/health', async function (request, response) {
 		let balanceInWei
 		let balanceInEth
 		const address = config.Ethereum[config.environment].account
