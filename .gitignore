@@ -10,3 +10,4 @@ config.json
 netlify/
 # Local Netlify folder
 .netlify
+.env

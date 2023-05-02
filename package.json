@@ -4,12 +4,10 @@
   "description": "MaxxChain tetnet Network faucet",
   "main": "index.js",
   "scripts": {
-    "start": "npm run sass && npm run coffee && node src/index.js",
+    "build-assets": "npm run sass && npm run coffee",
     "sass": "gulp sass",
     "coffee": "gulp javascript",
-    "watch": "gulp watch",
-    "serve": "./node_modules/.bin/netlify-lambda serve src",
-    "build": "./node_modules/.bin/netlify-lambda build src"
+    "watch": "gulp watch"
   },
   "repository": {
     "type": "git",
