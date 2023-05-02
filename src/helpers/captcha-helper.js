@@ -1,7 +1,7 @@
 const querystring = require('querystring')
 const https = require('https')
 const { debug } = require('../helpers/debug')
-const config = require('../../config.json')
+const config = require('../../config.json.example')
 
 function validateCaptcha (captchaResponse) {
 	return new Promise((resolve, reject) => {

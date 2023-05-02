@@ -3,7 +3,7 @@ const { generateErrorResponse } = require('../helpers/generate-response')
 const { validateCaptcha } = require('../helpers/captcha-helper')
 const { debug } = require('../helpers/debug')
 const { configureWeb3 } = require('../helpers/blockchain-helper')
-const config = require('../../config.json')
+const config = require('../../config.json.example')
 
 module.exports = function (router) {
 	const web3 = configureWeb3()
