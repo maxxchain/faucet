@@ -3,6 +3,7 @@ const { sendPOAToRecipient } = require("./helpers/blockchain-helper")
 const { debug } = require("./helpers/debug.js")
 const { generateErrorResponse } = require("./helpers/generate-response")
 const { validateCaptcha, validateCaptchaResponse } = require("./helpers/captcha-helper")
+const { messages } = require('./config/index')
 
 module.exports.init = async function (request) {
     const isDebug = config.debug
@@ -24,7 +25,7 @@ module.exports.init = async function (request) {
         return generateErrorResponse(e)
     }
 
-    if (await validateCaptchaResponse(captchaResponse, receiver, response)) {
+    if (await validateCaptchaResponse(captchaResponse, receiver)) {
         return sendPOAToRecipient(receiver, isDebug);
     }
     return null

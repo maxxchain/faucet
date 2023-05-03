@@ -1,6 +1,7 @@
 const querystring = require('querystring')
 const https = require('https')
 const { debug } = require('../helpers/debug')
+const { generateErrorResponse } = require('../helpers/generate-response')
 const config = require('../config/index.js').env;
 require('dotenv').config()
 
