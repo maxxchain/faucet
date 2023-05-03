@@ -2,31 +2,32 @@ const config = require('./config/index').env
 const { sendPOAToRecipient } = require("./helpers/blockchain-helper")
 const { debug } = require("./helpers/debug.js")
 const { generateErrorResponse } = require("./helpers/generate-response")
+const { validateCaptcha, validateCaptchaResponse } = require("./helpers/captcha-helper")
 
 module.exports.init = async function (request) {
     const isDebug = config.debug
     const receiver = request.body.receiver
     debug(isDebug, "REQUEST:")
     debug(isDebug, request.body)
-    // const recaptureResponse = request.body["g-recaptcha-response"]
-    // if (!recaptureResponse) {
-    //     const error = {
-    //         message: messages.INVALID_CAPTCHA,
-    //     }
-    //     return generateErrorResponse(error)
-    // }
+    const recaptureResponse = request.body["g-recaptcha-response"]
+    if (!recaptureResponse) {
+        const error = {
+            message: messages.INVALID_CAPTCHA,
+        }
+        return generateErrorResponse(error)
+    }
 
-    // let captchaResponse
-    // try {
-    // 	captchaResponse = await validateCaptcha(recaptureResponse)
-    // } catch(e) {
-    // 	return generateErrorResponse(e)
-    // }
+    let captchaResponse
+    try {
+        captchaResponse = await validateCaptcha(recaptureResponse)
+    } catch (e) {
+        return generateErrorResponse(e)
+    }
 
-    // if (await validateCaptchaResponse(captchaResponse, receiver, response)) {
-    // 	await sendPOAToRecipient(web3, receiver, response, isDebug)
-    // }
-    return sendPOAToRecipient(receiver, isDebug);
+    if (await validateCaptchaResponse(captchaResponse, receiver, response)) {
+        return sendPOAToRecipient(receiver, isDebug);
+    }
+    return null
 }
 
 module.exports.health = async function () {
