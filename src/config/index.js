@@ -8,7 +8,7 @@ const messages = {
 
 const env = {
     "environment": "prod",
-    "debug": true,
+    "debug": false,
     "milliEtherToTransfer": 100,
     "chainId": 1023,
     "gas": 210000,

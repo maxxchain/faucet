@@ -55,36 +55,18 @@ module.exports.sendPOAToRecipient = async function (receiver, isDebug) {
 
 	const serializedTx = tx.serialize()
 
-	let txHash
-	web3.eth.sendSignedTransaction("0x" + serializedTx.toString('hex'))
-		.on('transactionHash', (_txHash) => {
-			txHash = _txHash
-		})
-		.on('receipt', (receipt) => {
-			debug(isDebug, receipt)
-			if (receipt.status == '0x1') {
-				return sendRawTransactionResponse(txHash)
-			} else {
-				const error = {
-					message: messages.TX_HAS_BEEN_MINED_WITH_FALSE_STATUS,
-				}
-				return generateErrorResponse(error);
+	try {
+		const res = await web3.eth.sendSignedTransaction("0x" + serializedTx.toString('hex'))
+		return {
+			success:
+			{
+				code: 200,
+				title: 'Success',
+				message: messages.TX_HAS_BEEN_MINED,
+				txHash: res.transactionHash
 			}
-		})
-		.on('error', (error) => {
-			return generateErrorResponse(error)
-		});
-}
-
-module.exports.sendRawTransactionResponse = function (txHash) {
-	const successResponse = {
-		code: 200,
-		title: 'Success',
-		message: messages.TX_HAS_BEEN_MINED,
-		txHash: txHash
+		}
+	} catch (error) {
+		return generateErrorResponse(error)
 	}
-
-	return ({
-		success: successResponse
-	})
 }

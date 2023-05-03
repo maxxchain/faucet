@@ -2,9 +2,9 @@
   "name": "maxxchain-test-network-faucet",
   "version": "1.0.2",
   "description": "MaxxChain tetnet Network faucet",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "build-assets": "npm run sass && npm run coffee",
+    "start": "npm run sass && npm run coffee && node src/index.js",
     "sass": "gulp sass",
     "coffee": "gulp javascript",
     "watch": "gulp watch"
@@ -18,7 +18,6 @@
   "dependencies": {
     "body-parser": "1.19.0",
     "dotenv": "^16.0.3",
-    "electron": "^24.1.3",
     "ethereumjs-tx": "1.3.7",
     "express": "4.18.1",
     "gulp": "^3.9.1",
@@ -36,10 +35,8 @@
     "gulp-uglifycss": "1.1.0",
     "http-server": "^14.1.1",
     "moment": "^2.29.4",
-    "netlify-lambda": "^2.0.16",
     "querystring": "0.2.0",
     "sass": "^1.49.8",
-    "serverless-http": "^3.2.0",
     "web3": "^1.7.5"
   },
   "overrides": {
