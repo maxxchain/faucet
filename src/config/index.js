@@ -13,7 +13,7 @@ const env = {
     "chainId": 1023,
     "gas": 210000,
     "gasPrice": 1000000000,
-    "rpc": "https://rpc.maxxchain.org"
+    "rpc": "https://testrpc.maxxchain.org"
 }
 
 
